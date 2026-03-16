@@ -2,160 +2,444 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>留学生来华学校信息查询</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>来华留学 · 院校信息大全</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Inter', '微软雅黑', system-ui, sans-serif;
         }
+
         body {
-            font-family: '微软雅黑', sans-serif;
-            background-color: #f4f7fb;
-            padding: 20px;
+            background: linear-gradient(145deg, #f8faff 0%, #f0f5fe 100%);
+            min-height: 100vh;
+            padding: 2rem 1.5rem;
         }
+
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
-        header {
+
+        /* 头部 */
+        .header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 3rem;
         }
-        h1 {
-            color: #1e3c72;
-            font-size: 2.5em;
-            margin-bottom: 10px;
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e2b4f, #2a4a7a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.5rem;
         }
-        .subtitle {
-            color: #4a6fa5;
-            font-size: 1.2em;
+
+        .header p {
+            font-size: 1.2rem;
+            color: #4a5b7a;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
         }
+
+        /* 筛选栏 */
+        .filter-bar {
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 60px;
+            padding: 0.8rem 1.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 30px -10px rgba(0,40,100,0.2);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-label {
+            font-weight: 600;
+            color: #1e3a5f;
+            padding-right: 0.5rem;
+            border-right: 2px solid #cbd5e1;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #2c3e66;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .filter-btn:hover {
+            background: #e6edf9;
+        }
+
+        .filter-btn.active {
+            background: #1e3a5f;
+            color: white;
+            box-shadow: 0 4px 10px rgba(30,58,95,0.3);
+            border-color: #1e3a5f;
+        }
+
+        /* 学校卡片网格 */
         .school-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
         }
+
         .school-card {
             background: white;
-            border-radius: 12px;
-            padding: 25px 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            transition: transform 0.2s, box-shadow 0.2s;
-            border-left: 5px solid #4a90e2;
+            border-radius: 28px;
+            padding: 1.8rem 1.5rem;
+            box-shadow: 0 20px 35px -10px rgba(0,30,70,0.15);
+            transition: transform 0.25s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.5);
+            backdrop-filter: blur(4px);
+            display: flex;
+            flex-direction: column;
         }
+
         .school-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+            transform: translateY(-8px);
+            box-shadow: 0 30px 45px -12px rgba(0,50,100,0.25);
         }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.2rem;
+        }
+
         .school-name {
-            font-size: 1.5em;
-            color: #1e3c72;
-            margin-bottom: 10px;
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #0a2540;
+            line-height: 1.2;
         }
+
+        .badge {
+            background: #e9f2ff;
+            color: #1e3a5f;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 1rem;
+            white-space: nowrap;
+        }
+
         .school-meta {
             display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
-            font-size: 0.9em;
-            color: #5a6b7a;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: #4e6e8c;
+            font-size: 0.95rem;
         }
-        .school-type, .school-location {
-            background: #e9f0f9;
-            padding: 4px 10px;
-            border-radius: 20px;
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: #f2f6fc;
+            padding: 0.3rem 0.8rem;
+            border-radius: 30px;
         }
+
         .school-desc {
-            color: #2c3e50;
+            color: #2f405c;
             line-height: 1.6;
-            margin-bottom: 20px;
+            margin: 1rem 0 1.5rem;
+            flex: 1;
+            font-size: 0.95rem;
         }
+
         .btn-detail {
-            display: inline-block;
-            background-color: #4a90e2;
+            background: linear-gradient(105deg, #1e3a5f, #1f4a7a);
             color: white;
             text-decoration: none;
-            padding: 8px 20px;
-            border-radius: 30px;
-            font-weight: bold;
+            padding: 0.9rem 1.5rem;
+            border-radius: 40px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
             transition: background 0.2s;
+            border: none;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            box-shadow: 0 8px 18px -6px #1e3a5f70;
         }
+
         .btn-detail:hover {
-            background-color: #1e3c72;
+            background: linear-gradient(105deg, #16324f, #163e63);
         }
-        footer {
+
+        .footer {
             text-align: center;
-            margin-top: 50px;
-            color: #7f8c8d;
-            font-size: 0.9em;
+            margin-top: 4rem;
+            color: #62748c;
+            font-size: 0.95rem;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            padding-top: 2rem;
+        }
+
+        /* 无结果提示 */
+        .no-result {
+            text-align: center;
+            padding: 3rem;
+            font-size: 1.2rem;
+            color: #62748c;
+            grid-column: 1 / -1;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 700px) {
+            .header h1 { font-size: 2.2rem; }
+            .filter-bar { border-radius: 30px; flex-direction: column; align-items: stretch; }
+            .filter-group { justify-content: center; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>🎓 留学生来华学校信息查询</h1>
-            <div class="subtitle">为留学生提供简单、清晰的中国院校信息参考</div>
-        </header>
-
-        <div class="school-grid">
-            <!-- 北京大学卡片 -->
-            <div class="school-card">
-                <div class="school-name">北京大学</div>
-                <div class="school-meta">
-                    <span class="school-type">综合类</span>
-                    <span class="school-location">北京</span>
-                </div>
-                <div class="school-desc">
-                    国内顶尖综合大学，国际交流项目丰富，QS排名靠前。
-                </div>
-                <a href="peking.html" class="btn-detail">查看详情 →</a>
-            </div>
-
-            <!-- 清华大学卡片 -->
-            <div class="school-card">
-                <div class="school-name">清华大学</div>
-                <div class="school-meta">
-                    <span class="school-type">综合类</span>
-                    <span class="school-location">北京</span>
-                </div>
-                <div class="school-desc">
-                    理工与文科并重，国际认可度极高，拥有众多国际学生。
-                </div>
-                <a href="tsinghua.html" class="btn-detail">查看详情 →</a>
-            </div>
-
-            <!-- 复旦大学卡片 -->
-            <div class="school-card">
-                <div class="school-name">复旦大学</div>
-                <div class="school-meta">
-                    <span class="school-type">综合类</span>
-                    <span class="school-location">上海</span>
-                </div>
-                <div class="school-desc">
-                    华东地区顶尖名校，国际化程度高，地处上海。
-                </div>
-                <a href="fudan.html" class="btn-detail">查看详情 →</a>
-            </div>
-
-            <!-- 南京大学卡片 -->
-            <div class="school-card">
-                <div class="school-name">南京大学</div>
-                <div class="school-meta">
-                    <span class="school-type">综合类</span>
-                    <span class="school-location">南京</span>
-                </div>
-                <div class="school-desc">
-                    历史悠久，人文社科实力强劲，校园环境优美。
-                </div>
-                <a href="nanjing.html" class="btn-detail">查看详情 →</a>
-            </div>
-
+        <div class="header">
+            <h1>🎓 来华留学 · 院校信息大全</h1>
+            <p>一站式查询中国顶尖高校的招生条件、时间节点与奖学金</p>
         </div>
 
-        <footer>
-            <p>© 2025 留学生来华信息查询 | 让留学中国更简单</p>
-        </footer>
+        <!-- 筛选栏 -->
+        <div class="filter-bar" id="filterBar">
+            <div class="filter-group">
+                <span class="filter-label">城市</span>
+                <button class="filter-btn active" data-filter="city" data-value="all">全部</button>
+                <!-- 城市按钮由JS动态生成，避免硬编码 -->
+            </div>
+            <div class="filter-group">
+                <span class="filter-label">类型</span>
+                <button class="filter-btn active" data-filter="type" data-value="all">全部</button>
+                <!-- 类型按钮由JS动态生成 -->
+            </div>
+        </div>
+
+        <!-- 卡片容器 -->
+        <div class="school-grid" id="schoolGrid"></div>
+
+        <div class="footer">
+            <p>© 2025 来华留学信息网 · 数据仅供参考，请以官网为准</p>
+        </div>
     </div>
+
+    <script>
+        (function() {
+            // ---------- 学校数据数组 ----------
+            const schools = [
+                // 原有4所
+                {
+                    name: '北京大学',
+                    city: '北京',
+                    type: '综合类',
+                    description: '国内顶尖综合大学，国际交流项目丰富，QS排名靠前。',
+                    link: 'peking.html'
+                },
+                {
+                    name: '清华大学',
+                    city: '北京',
+                    type: '综合类',
+                    description: '理工与文科并重，国际认可度极高，拥有众多国际学生。',
+                    link: 'tsinghua.html'
+                },
+                {
+                    name: '复旦大学',
+                    city: '上海',
+                    type: '综合类',
+                    description: '华东地区顶尖名校，国际化程度高，地处上海。',
+                    link: 'fudan.html'
+                },
+                {
+                    name: '南京大学',
+                    city: '南京',
+                    type: '综合类',
+                    description: '历史悠久，人文社科实力强劲，校园环境优美。',
+                    link: 'nanjing.html'
+                },
+                // 新增7所
+                {
+                    name: '华中科技大学',
+                    city: '武汉',
+                    type: '理工类',
+                    description: '教育部直属重点综合性大学，由原华中理工大学、同济医科大学等合并组建。国家“211工程”“985工程”重点建设高校。',
+                    link: 'hust.html'
+                },
+                {
+                    name: '西安交通大学',
+                    city: '西安',
+                    type: '综合类',
+                    description: '首批进入国家“211”和“985”的综合性研究型大学，2017年入选“双一流”A类。',
+                    link: 'xjtu.html'
+                },
+                {
+                    name: '中山大学',
+                    city: '广州',
+                    type: '综合类',
+                    description: '由孙中山先生创办，现形成三校区五校园办学格局，拥有10家附属医院。',
+                    link: 'sysu.html'
+                },
+                {
+                    name: '四川大学',
+                    city: '成都',
+                    type: '综合类',
+                    description: '中国西部重点建设的高水平研究型综合大学，由原川大、成都科大、华西医科大合并。',
+                    link: 'scu.html'
+                },
+                {
+                    name: '西北工业大学',
+                    city: '西安',
+                    type: '理工类',
+                    description: '以发展航空、航天、航海为特色，被誉为“总师摇篮”，985/211/双一流A类。',
+                    link: 'nwpu.html'
+                },
+                {
+                    name: '山东大学',
+                    city: '济南',
+                    type: '综合类',
+                    description: '中国近代高等教育的起源性大学，一校三地（济南、威海、青岛）办学格局。',
+                    link: 'sdu.html'
+                },
+                {
+                    name: '华南理工大学',
+                    city: '广州',
+                    type: '理工类',
+                    description: '新中国四大工学院之一，被誉为“工程师的摇篮”“新能源汽车界的黄埔军校”。',
+                    link: 'scut.html'
+                }
+            ];
+
+            // 从数据中提取唯一的城市和类型列表
+            const cities = [...new Set(schools.map(s => s.city))].sort();
+            const types = [...new Set(schools.map(s => s.type))].sort();
+
+            // 获取DOM元素
+            const filterBar = document.getElementById('filterBar');
+            const cityGroup = filterBar.querySelector('.filter-group:first-child');
+            const typeGroup = filterBar.querySelector('.filter-group:last-child');
+            const schoolGrid = document.getElementById('schoolGrid');
+
+            // 动态生成城市按钮（保留“全部”）
+            cities.forEach(city => {
+                const btn = document.createElement('button');
+                btn.className = 'filter-btn';
+                btn.setAttribute('data-filter', 'city');
+                btn.setAttribute('data-value', city);
+                btn.textContent = city;
+                cityGroup.appendChild(btn);
+            });
+
+            // 动态生成类型按钮
+            types.forEach(type => {
+                const btn = document.createElement('button');
+                btn.className = 'filter-btn';
+                btn.setAttribute('data-filter', 'type');
+                btn.setAttribute('data-value', type);
+                btn.textContent = type;
+                typeGroup.appendChild(btn);
+            });
+
+            // 当前筛选状态
+            let currentCity = 'all';
+            let currentType = 'all';
+
+            // 筛选函数
+            function filterSchools() {
+                return schools.filter(school => {
+                    const cityMatch = currentCity === 'all' || school.city === currentCity;
+                    const typeMatch = currentType === 'all' || school.type === currentType;
+                    return cityMatch && typeMatch;
+                });
+            }
+
+            // 渲染卡片
+            function renderSchools() {
+                const filtered = filterSchools();
+                if (filtered.length === 0) {
+                    schoolGrid.innerHTML = '<div class="no-result">没有符合条件的学校，试试其他筛选条件吧～</div>';
+                    return;
+                }
+
+                let html = '';
+                filtered.forEach(school => {
+                    html += `
+                        <div class="school-card">
+                            <div class="card-header">
+                                <span class="school-name">${school.name}</span>
+                                <span class="badge">${school.type}</span>
+                            </div>
+                            <div class="school-meta">
+                                <span class="meta-item">📍 ${school.city}</span>
+                            </div>
+                            <div class="school-desc">${school.description}</div>
+                            <a href="${school.link}" class="btn-detail">查看详情 →</a>
+                        </div>
+                    `;
+                });
+                schoolGrid.innerHTML = html;
+            }
+
+            // 处理筛选按钮点击
+            function setupFilterButtons() {
+                const allBtns = document.querySelectorAll('.filter-btn');
+                allBtns.forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        const filter = this.dataset.filter;
+                        const value = this.dataset.value;
+
+                        // 更新对应分组的高亮
+                        const group = this.parentNode;
+                        group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                        this.classList.add('active');
+
+                        // 更新全局筛选变量
+                        if (filter === 'city') {
+                            currentCity = value;
+                        } else if (filter === 'type') {
+                            currentType = value;
+                        }
+
+                        // 重新渲染
+                        renderSchools();
+                    });
+                });
+            }
+
+            // 初始渲染
+            renderSchools();
+            setupFilterButtons();
+        })();
+    </script>
+</body>
+</html>
 </body>
 </html>
