@@ -1,38 +1,48 @@
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>留学生来华学校信息查询</title>
+    <title>Global繁木力 · 来华留学</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "Microsoft YaHei", sans-serif;
+            font-family: '微软雅黑', sans-serif;
         }
         body {
-            background: #f7f8fa;
-            font-family: '微软雅黑', sans-serif;
-            background-color: #f4f7fb;
-            padding: 20px;
+            background: #f4f8ff;
+            padding: 30px 20px;
         }
         .container {
-            max-width: 800px;
             max-width: 1200px;
             margin: 0 auto;
         }
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
         h1 {
-            color: #1e3c72;
-            font-size: 2.5em;
+            text-align: center;
+            font-size: 3rem;
+            color: #1e3a5f;
             margin-bottom: 10px;
         }
+        .family-tag {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .family-tag span {
+            background: #ffd966;
+            padding: 5px 20px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            color: #1e3a5f;
+        }
         .subtitle {
+            text-align: center;
             color: #4a6fa5;
-            font-size: 1.2em;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            border-bottom: 2px dashed #aac8e0;
+            padding-bottom: 15px;
         }
         .school-grid {
             display: grid;
@@ -41,169 +51,212 @@
         }
         .school-card {
             background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            border-radius: 24px;
             padding: 25px 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            transition: transform 0.2s, box-shadow 0.2s;
-            border-left: 5px solid #4a90e2;
+            box-shadow: 0 10px 25px -10px rgba(0,0,0,0.1);
+            border: 1px solid #e0ecff;
         }
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-            margin-bottom: 20px;
-            font-size: 24px;
-        .school-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 25px rgba(0,0,0,0.1);
-        }
-        .intro {
-            text-align: center;
-            color: #666;
-            margin-bottom: 30px;
-            line-height: 1.6;
-        .school-name {
-            font-size: 1.5em;
-            color: #1e3c72;
+        .school-card h2 {
+            color: #0a2540;
+            font-size: 1.8rem;
             margin-bottom: 10px;
         }
-        .item {
-            padding: 15px;
-            border-bottom: 1px solid #eee;
-        .school-meta {
-            display: flex;
-            gap: 15px;
+        .badge {
+            display: inline-block;
+            background: #e9eff7;
+            color: #1e3a5f;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 0.8rem;
             margin-bottom: 15px;
-            font-size: 0.9em;
-            color: #5a6b7a;
         }
-        .item h3 {
-            color: #333;
-            margin-bottom: 6px;
-        .school-type, .school-location {
-            background: #e9f0f9;
-            padding: 4px 10px;
-            border-radius: 20px;
+        .school-meta {
+            color: #4a6e8c;
+            margin-bottom: 15px;
         }
-        .item p {
-            color: #666;
-            font-size: 14px;
         .school-desc {
-            color: #2c3e50;
+            color: #2d4a6e;
             line-height: 1.6;
             margin-bottom: 20px;
         }
         .btn-detail {
             display: inline-block;
-            background-color: #4a90e2;
+            background: #1e3a5f;
             color: white;
             text-decoration: none;
-            padding: 8px 20px;
-            border-radius: 30px;
-            font-weight: bold;
-            transition: background 0.2s;
+            padding: 10px 25px;
+            border-radius: 40px;
+            font-weight: 600;
+        }
+        .btn-detail:hover {
+            background: #0f2b48;
         }
         .footer {
-        .btn-detail:hover {
-            background-color: #1e3c72;
-        }
-        footer {
             text-align: center;
-            margin-top: 30px;
-            color: #999;
-            font-size: 12px;
             margin-top: 50px;
-            color: #7f8c8d;
-            font-size: 0.9em;
+            color: #6c86a3;
+            padding-top: 20px;
+            border-top: 1px solid #d0e0ff;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>留学生来华学校信息查询</h1>
-        <p class="intro">为留学生提供简单、清晰的中国院校信息参考</p>
-        <header>
-            <h1>🎓 留学生来华学校信息查询</h1>
-            <div class="subtitle">为留学生提供简单、清晰的中国院校信息参考</div>
-        </header>
+        <h1>Global繁木力</h1>
+        <div class="family-tag">
+            <span>We are family</span>
+        </div>
+        <div class="subtitle">让留学中国更简单 · 一站式信息平台</div>
 
-        <div class="item">
-            <h3>北京大学</h3>
-            <p>类型：综合类 | 位置：北京 | 简介：国内顶尖综合大学，国际交流项目丰富</p>
-        </div>
-        <div class="item">
-            <h3>清华大学</h3>
-            <p>类型：综合类 | 位置：北京 | 简介：理工与文科并重，国际认可度极高</p>
-        </div>
-        <div class="item">
-            <h3>复旦大学</h3>
-            <p>类型：综合类 | 位置：上海 | 简介：华东地区顶尖名校，国际化程度高</p>
-        </div>
-        <div class="item">
-            <h3>南京大学</h3>
-            <p>类型：综合类 | 位置：南京 | 简介：历史悠久，人文社科实力强劲</p>
-        </div>
         <div class="school-grid">
-            <!-- 北京大学卡片 -->
+            <!-- 北京大学 -->
             <div class="school-card">
-                <div class="school-name">北京大学</div>
-                <div class="school-meta">
-                    <span class="school-type">综合类</span>
-                    <span class="school-location">北京</span>
-                </div>
-                <div class="school-desc">
-                    国内顶尖综合大学，国际交流项目丰富，QS排名靠前。
-                </div>
-                <a href="peking.html" class="btn-detail">查看详情 →</a>
+                <h2>北京大学</h2>
+                <span class="badge">综合类</span>
+                <div class="school-meta">📍 北京</div>
+                <p class="school-desc">中国第一所国立综合性大学，人文社科与理学顶尖。</p >
+                <a href=" " class="btn-detail">查看详情 →</a >
+            </div>
+            
+            <!-- 清华大学 -->
+            <div class="school-card">
+                <h2>清华大学</h2>
+                <span class="badge">综合类</span>
+                <div class="school-meta">📍 北京</div>
+                <p class="school-desc">顶尖工科名校，经管、计算机、建筑享誉全球。</p >
+                <a href="tsinghua.html" class="btn-detail">查看详情 →</a >
+            </div>
+            
+            <!-- 复旦大学 -->
+            <div class="school-card">
+                <h2>复旦大学</h2>
+                <span class="badge">综合类</span>
+                <div class="school-meta">📍 上海</div>
+                <p class="school-desc">华东顶尖名校，新闻、经济、医学实力强劲。</p >
+                <a href="fudan.html" class="btn-detail">查看详情 →</a >
+            </div>
+            
+            <!-- 南京大学 -->
+            <div class="school-card">
+                <h2>南京大学</h2>
+                <span class="badge">综合类</span>
+                <div class="school-meta">📍 南京</div>
+                <p class="school-desc">历史悠久，天文、地质、中文实力雄厚。</p >
+                <a href="nanjing.html" class="btn-detail">查看详情 →</a >
+            </div>
+            
+            <!-- 华中科技大学 -->
+            <div class="school-card">
+                <h2>华中科技大学</h2>
+                <span class="badge">理工类</span>
+                <div class="school-meta">📍 武汉</div>
+                <p class="school-desc">机械、光电、医学、生物医学工程领先。</p >
+                <a href="hust.html" class="btn-detail">查看详情 →</a >
+            </div>
+            
+            <!-- 西安交通大学 -->
+            <div class="school-card">
+                <h2>西安交通大学</h2>
+                <span class="badge">综合类</span>
+                <div class="school-meta">📍 西安</div>
+                <p class="school-desc">电气、能动、机械实力强劲，首批985/211。</p >
+                <a href="xjtu.html" class="btn-detail">查看详情 →</a >
+            </div>
+            
+            <!-- 中山大学 -->
+            <div class="school-card">
+                <h2>中山大学</h2>
+                <span class="badge">综合类</span>
+                <div class="school-meta">📍 广州</div>
+                <p class="school-desc">三校区五校园，医学、管理、哲学突出。</p >
+                <a href="sysu.html" class="btn-detail">查看详情 →</a >
+            </div>
+            
+            <!-- 四川大学 -->
+            <div class="school-card">
+                <h2>四川大学</h2>
+                <span class="badge">综合类</span>
+                <div class="school-meta">📍 成都</div>
+                <p class="school-desc">口腔医学享誉海内外，西部重点综合大学。</p >
+                <a href="scu.html" class="btn-detail">查看详情 →</a >
+            </div>
+            
+            <!-- 西北工业大学 -->
+            <div class="school-card">
+                <h2>西北工业大学</h2>
+                <span class="badge">理工类</span>
+                <div class="school-meta">📍 西安</div>
+                <p class="school-desc">航空、航天、航海特色，“总师摇篮”。</p >
+                <a href="nwpu.html" class="btn-detail">查看详情 →</a >
+            </div>
+            
+            <!-- 山东大学 -->
+            <div class="school-card">
+                <h2>山东大学</h2>
+                <span class="badge">综合类</span>
+                <div class="school-meta">📍 济南</div>
+                <p class="school-desc">一校三地办学，数学、中文、医学雄厚。</p >
+                <a href="sdu.html" class="btn-detail">查看详情 →</a >
+            </div>
+            
+            <!-- 华南理工大学 -->
+            <div class="school-card">
+                <h2>华南理工大学</h2>
+                <span class="badge">理工类</span>
+                <div class="school-meta">📍 广州</div>
+                <p class="school-desc">四大工学院之一，工程师的摇篮。</p >
+                <a href="scut.html" class="btn-detail">查看详情 →</a >
             </div>
 
-            <!-- 清华大学卡片 -->
+            <!-- 东南大学（新） -->
             <div class="school-card">
-                <div class="school-name">清华大学</div>
-                <div class="school-meta">
-                    <span class="school-type">综合类</span>
-                    <span class="school-location">北京</span>
-                </div>
-                <div class="school-desc">
-                    理工与文科并重，国际认可度极高，拥有众多国际学生。
-                </div>
-                <a href="tsinghua.html" class="btn-detail">查看详情 →</a>
+                <h2>东南大学</h2>
+                <span class="badge">综合类</span>
+                <div class="school-meta">📍 南京</div>
+                <p class="school-desc">以工科见长，建筑学科享誉全国，底蕴深厚。</p >
+                <a href="dongnan.html" class="btn-detail">查看详情 →</a >
             </div>
 
-            <!-- 复旦大学卡片 -->
+            <!-- 中国人民大学（新） -->
             <div class="school-card">
-                <div class="school-name">复旦大学</div>
-                <div class="school-meta">
-                    <span class="school-type">综合类</span>
-                    <span class="school-location">上海</span>
-                </div>
-                <div class="school-desc">
-                    华东地区顶尖名校，国际化程度高，地处上海。
-                </div>
-                <a href="fudan.html" class="btn-detail">查看详情 →</a>
+                <h2>中国人民大学</h2>
+                <span class="badge">综合类</span>
+                <div class="school-meta">📍 北京</div>
+                <p class="school-desc">以人文社会学科为主的综合性研究高校。</p >
+                <a href="ruc.html" class="btn-detail">查看详情 →</a >
             </div>
 
-            <!-- 南京大学卡片 -->
+            <!-- 同济大学（新） -->
             <div class="school-card">
-                <div class="school-name">南京大学</div>
-                <div class="school-meta">
-                    <span class="school-type">综合类</span>
-                    <span class="school-location">南京</span>
-                </div>
-                <div class="school-desc">
-                    历史悠久，人文社科实力强劲，校园环境优美。
-                </div>
-                <a href="nanjing.html" class="btn-detail">查看详情 →</a>
+                <h2>同济大学</h2>
+                <span class="badge">综合类</span>
+                <div class="school-meta">📍 上海</div>
+                <p class="school-desc">以工科见长，土木建筑交通领域顶尖。</p >
+                <a href="tongji.html" class="btn-detail">查看详情 →</a >
             </div>
+
+            <!-- 北京师范大学（新） -->
+            <div class="school-card">
+                <h2>北京师范大学</h2>
+                <span class="badge">综合类</span>
+                <div class="school-meta">📍 北京</div>
+                <p class="school-desc">教师教育、教育科学和文理基础学科为主要特色。</p >
+                <a href="bnu.html" class="btn-detail">查看详情 →</a >
+            </div>
+
+            <!-- 天津大学（新） -->
+            <div class="school-card">
+                <h2>天津大学</h2>
+                <span class="badge">综合类</span>
+                <div class="school-meta">📍 天津</div>
+                <p class="school-desc">以工科为优势的综合性研究型大学。</p >
+                <a href="tju.html" class="btn-detail">查看详情 →</a >
+            </div>
+        </div>
 
         <div class="footer">
-            本网站仅作信息展示，非盈利、非商用 | 无广告 | 完全免费
+            <p>© 2025 Global繁木力 · 数据持续更新中</p >
         </div>
-
-        <footer>
-            <p>© 2025 留学生来华信息查询 | 让留学中国更简单</p>
-        </footer>
     </div>
 </body>
 </html>
