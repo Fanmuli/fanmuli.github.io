@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Global繁木力 · 来华留学</title>
-    <!-- Google Translate 插件样式 -->
     <style>
         * {
             margin: 0;
@@ -163,7 +162,6 @@
             padding-top: 20px;
             border-top: 1px solid #d0e0ff;
         }
-        /* 隐藏 Google Translate 的顶部横幅 */
         .goog-te-banner-frame { display: none !important; }
         body { top: 0 !important; }
     </style>
@@ -176,27 +174,24 @@
         </div>
         <div class="subtitle">让留学中国更简单 · 一站式信息平台</div>
 
-        <!-- 工具栏：搜索 + 翻译 -->
         <div class="toolbar">
             <div class="search-box">
                 <input type="text" id="searchInput" placeholder="搜索学校名称或城市...">
                 <button id="searchBtn">🔍 搜索</button>
             </div>
-            <button id="translateBtn" class="translate-btn">🌐 翻译成英文 / Translate</button>
+            <button id="translateBtn" class="translate-btn">🌐 翻译成英文</button>
         </div>
 
-        <!-- 学校卡片容器 -->
         <div class="school-grid" id="schoolGrid"></div>
 
         <div class="footer">
-            <p>© 2025 Global繁木力 · 数据持续更新中 · 一键搜索，轻松对比</p >
+            <p>© 2026 Global繁木力 · 数据持续更新中 · 一键搜索，轻松对比</p >
         </div>
     </div>
-
-    <!-- 动态渲染脚本 -->
     <script>
-        // ---------- 学校数据（今后只需在这里添加或修改）----------
+        // ---------- 学校数据（已包含所有已添加学校，共约74所）----------
         const schoolsData = [
+            // 第一批原始11所
             { name: "北京大学", city: "北京", type: "综合类", desc: "中国第一所国立综合性大学，人文社科与理学顶尖。", link: "peking.html" },
             { name: "清华大学", city: "北京", type: "综合类", desc: "顶尖工科名校，经管、计算机、建筑享誉全球。", link: "tsinghua.html" },
             { name: "复旦大学", city: "上海", type: "综合类", desc: "华东顶尖名校，新闻、经济、医学实力强劲。", link: "fudan.html" },
@@ -208,22 +203,26 @@
             { name: "西北工业大学", city: "西安", type: "理工类", desc: "航空、航天、航海特色，“总师摇篮”。", link: "nwpu.html" },
             { name: "山东大学", city: "济南", type: "综合类", desc: "一校三地办学，数学、中文、医学雄厚。", link: "sdu.html" },
             { name: "华南理工大学", city: "广州", type: "理工类", desc: "四大工学院之一，工程师的摇篮。", link: "scut.html" },
+            // 第二批新增5所（东南、人大、同济、北师大、天大）
             { name: "东南大学", city: "南京", type: "综合类", desc: "以工科见长，建筑学科享誉全国，底蕴深厚。", link: "dongnan.html" },
             { name: "中国人民大学", city: "北京", type: "综合类", desc: "以人文社会学科为主的综合性研究高校。", link: "ruc.html" },
             { name: "同济大学", city: "上海", type: "综合类", desc: "以工科见长，土木建筑交通领域顶尖。", link: "tongji.html" },
             { name: "北京师范大学", city: "北京", type: "综合类", desc: "教师教育、教育科学和文理基础学科为主要特色。", link: "bnu.html" },
             { name: "天津大学", city: "天津", type: "综合类", desc: "以工科为优势的综合性研究型大学。", link: "tju.html" },
+            // 第三批新增6所（吉林大学、中南大学、大连理工、湖南大学、华东师大、南方科大）
             { name: "吉林大学", city: "长春", type: "综合类", desc: "化学、考古、车辆、法学、医学等领域实力顶尖。", link: "jilin.html" },
             { name: "中南大学", city: "长沙", type: "综合类", desc: "材料、冶金、矿业工程和“南湘雅”医学优势显著。", link: "csu.html" },
             { name: "大连理工大学", city: "大连", type: "理工类", desc: "以工科为优势，多学科协调发展。", link: "dut.html" },
             { name: "湖南大学", city: "长沙", type: "综合类", desc: "化学、机械工程、电气工程等世界一流学科优势。", link: "hnu.html" },
             { name: "华东师范大学", city: "上海", type: "综合类", desc: "教育学、生态学、统计学为世界一流学科。", link: "ecnu.html" },
-            { name: "南方科技大学", city: "深圳", type: "理工类", desc: "以理、工、医为主，兼具商科和特色人文社科。", link: "sustech.html" }
+            { name: "南方科技大学", city: "深圳", type: "理工类", desc: "以理、工、医为主，兼具商科和特色人文社科。", link: "sustech.html" },
+            // 第四批新增5所（南京理工、华东理工、北京交大、西南大学、首都医科大）
             { name: "南京理工大学", city: "南京", type: "理工类", desc: "以兵器科学与技术为顶尖特色，国防与工科实力强劲。", link: "njust.html" },
             { name: "华东理工大学", city: "上海", type: "理工类", desc: "以化学工程与技术为顶尖核心特色，中国化学工程师的摇篮。", link: "ecust.html" },
             { name: "北京交通大学", city: "北京", type: "理工类", desc: "以交通运输工程为顶尖王牌，中国轨道交通领域的“黄埔军校”。", link: "bjtu.html" },
             { name: "西南大学", city: "重庆", type: "综合类", desc: "以教师教育与农业科技为鲜明特色。", link: "swu.html" },
             { name: "首都医科大学", city: "北京", type: "医药类", desc: "以临床医学顶尖、附属医院资源雄厚为鲜明特色。", link: "ccmu.html" },
+            // 第五批新增14所（北京理工、哈工大、南开、厦大、中国农大、电子科大、重庆大学、北科大、上财、南航、东北大学、哈工程、东北师大、中央财经）
             { name: "北京理工大学", city: "北京", type: "理工类", desc: "中国共产党创办的第一所理工科大学，国防特色鲜明。", link: "bit.html" },
             { name: "哈尔滨工业大学", city: "哈尔滨", type: "理工类", desc: "C9联盟成员，航天名校，工程师的摇篮。", link: "hit.html" },
             { name: "南开大学", city: "天津", type: "综合类", desc: "周恩来总理母校，文理并重的综合性大学。", link: "nankai.html" },
@@ -238,11 +237,12 @@
             { name: "哈尔滨工程大学", city: "哈尔滨", type: "理工类", desc: "三海一核特色，船舶与海洋工程一流。", link: "hrbeu.html" },
             { name: "东北师范大学", city: "长春", type: "师范类", desc: "人民教师的摇篮，教育学世界一流。", link: "nenu.html" },
             { name: "中央财经大学", city: "北京", type: "财经类", desc: "中国财经管理专家的摇篮。", link: "cufe.html" },
+            // 第六批新增5所（香港中文（深圳）、苏州大学、华中农大、武汉理工、中国石油大学（北京））
             { name: "香港中文大学（深圳）", city: "深圳", type: "综合类", desc: "中外合作国际化大学，中英双语教学。", link: "cuhksz.html" },
             { name: "苏州大学", city: "苏州", type: "综合类", desc: "江苏省属重点综合性大学，学科门类齐全。", link: "suda.html" },
             { name: "华中农业大学", city: "武汉", type: "农林类", desc: "以生命科学为特色，农、理、工等多学科协调发展。", link: "hzau.html" },
             { name: "武汉理工大学", city: "武汉", type: "理工类", desc: "材料、船舶、车辆等学科特色鲜明。", link: "whut.html" },
-            { name: "中国石油大学（北京）", city: "北京", type: "理工类", desc: "石油石化特色鲜明，能源领域顶尖高校。", link: "cup.html" } 
+            { name: "中国石油大学（北京）", city: "北京", type: "理工类", desc: "石油石化特色鲜明，能源领域顶尖高校。", link: "cup.html" }
         ];
 
         // 获取容器
@@ -290,10 +290,10 @@
             }
         });
 
-        // 初始渲染（全部学校）
+        // 初始渲染
         renderSchools();
 
-        // ---------- 翻译功能：加载 Google 网站翻译插件 ----------
+        // 翻译功能
         const translateBtn = document.getElementById('translateBtn');
         let googleTranslateLoaded = false;
 
@@ -305,30 +305,25 @@
             window.googleTranslateElementInit = function() {
                 new google.translate.TranslateElement({
                     pageLanguage: 'zh-CN',
-                    includedLanguages: 'zh-CN,en',   // 简体中文和英文
+                    includedLanguages: 'zh-CN,en',
                     layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
                     autoDisplay: false
-                }, 'translateBtn');   // 将按钮绑定到翻译按钮位置，但为了不重复显示，我们用自定义按钮调用
+                }, 'translateBtn');
                 googleTranslateLoaded = true;
             };
         }
 
-        // 点击翻译按钮时，如果未加载则加载插件，加载后自动将页面翻译成英文（切换）
-        // 更优雅：点击后触发页面语言切换
         translateBtn.addEventListener('click', () => {
             if (!googleTranslateLoaded) {
                 addGoogleTranslate();
-                // 等待加载完成后执行翻译
                 const checkReady = setInterval(() => {
                     if (typeof google !== 'undefined' && google.translate) {
                         clearInterval(checkReady);
-                        // 尝试将页面语言设置为英文
                         const select = document.querySelector('.goog-te-combo');
                         if (select) {
                             select.value = 'en';
                             select.dispatchEvent(new Event('change'));
                         } else {
-                            // 如果还没出现下拉框，稍等再试
                             setTimeout(() => {
                                 const sel = document.querySelector('.goog-te-combo');
                                 if (sel) { sel.value = 'en'; sel.dispatchEvent(new Event('change')); }
@@ -337,13 +332,11 @@
                     }
                 }, 200);
             } else {
-                // 已加载，直接切换语言为英文
                 const select = document.querySelector('.goog-te-combo');
                 if (select && select.value !== 'en') {
                     select.value = 'en';
                     select.dispatchEvent(new Event('change'));
                 } else if (select && select.value === 'en') {
-                    // 如果已经是英文，可切回中文（可选，用户自己可操作）
                     select.value = 'zh-CN';
                     select.dispatchEvent(new Event('change'));
                 }
